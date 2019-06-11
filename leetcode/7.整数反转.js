@@ -10,9 +10,9 @@
 var reverse = function(x) {
   const MAX = 2 ** 31 - 1;
   const MIN = -(2 ** 31);
-  const arr = Array.from(Math.abs(x) + '');
+  const arr = Array.from(Math.abs(x) + "");
   const reversedArr = [...arr].map(() => arr.pop(), arr);
-  const reverseNum = parseInt(reversedArr.join(''));
+  const reverseNum = parseInt(reversedArr.join(""));
   return x > 0
     ? reverseNum > MAX
       ? 0
