@@ -11,11 +11,11 @@ var convertToTitle = function(n) {
   // 'A'.charCodeAt() === 65
   // String.fromCharCodeAt()
   let r = [];
-  while (n > 26) {
+  while (n > 0) {
+    n--;
     r.unshift(n % 26);
     n = (n / 26) | 0;
   }
-  r.unshift(n);
-  r = r.map(item => item + 64);
+  r = r.map(item => item + 65);
   return String.fromCharCode(...r);
 };
