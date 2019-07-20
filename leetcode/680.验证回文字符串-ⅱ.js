@@ -8,34 +8,27 @@
  * @return {boolean}
  */
 var validPalindrome = function(s) {
-  let [left, right, flag] = [0, s.length - 1, 0];
+  let [left, right] = [0, s.length - 1];
+  let temp = '';
   while (left <= right) {
     if (s[left] === s[right]) {
       left++;
       right--;
-    } else if (flag) {
-      return false;
     } else {
       if (s[left + 1] === s[right]) {
-        left += 2;
-        right--;
-        flag = 1;
-      } else if (s[left] === s[right - 1]) {
-        left++;
-        right -= 2;
-        flag = 1;
-      } else {
-        return false;
+        temp = s.slice(left + 1, right + 1);
+        if (temp === [...temp].reverse().join('')) {
+          return true;
+        }
       }
+      if (s[left] === s[right - 1]) {
+        temp = s.slice(left, right);
+        if (temp === [...temp].reverse().join('')) {
+          return true;
+        }
+      }
+      return false;
     }
   }
   return true;
 };
-/** why????
-  ✘ Wrong Answer
-  ✘ 458/460 cases passed (N/A)
-  ✘ testcase: '"aguokepatgbnvfqmgmlcupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupuculmgmqfvnbgtapekouga"'
-  ✘ answer: false
-  ✘ expected_answer: true
-  ✘ stdout:
- */
