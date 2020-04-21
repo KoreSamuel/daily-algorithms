@@ -18,20 +18,20 @@
  */
 var inorderTraversal = function (root) {
   const res = [];
-  helper(root, res);
+  const stack = [[false, root]];
+  while (stack.length) {
+    const [visited, node] = stack.pop();
+    if (!node) continue;
+    if (!visited) {
+      stack.push([false, node.right]);
+      stack.push([true, node]);
+      stack.push([false, node.left]);
+    } else {
+      res.push(node.val)
+    }
+  }
   return res;
 };
 
-function helper(root, res) {
-  if (root !== null) {
-    if (root.left !== null) {
-      helper(root.left, res);
-    }
-    res.push(root.val);
-    if (root.right !== null) {
-      helper(root.right, res)
-    }
-  }
-}
 // @lc code=end
 
