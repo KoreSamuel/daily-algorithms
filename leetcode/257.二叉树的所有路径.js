@@ -16,25 +16,50 @@
  * @param {TreeNode} root
  * @return {string[]}
  */
+// 递归
+// var binaryTreePaths = function (root) {
+//   const res = [];
+//   if (!root) return res;
+//   helper(root, [], res);
+//   return res;
+// };
+
+// function helper(root, cur, res) {
+//   if (!root) return;
+
+//   if (!root.left && !root.right) {
+//     cur += root.val;
+//     res.push(cur);
+//     return;
+//   } else {
+//     cur += root.val + '->'
+//   }
+//   helper(root.left, cur, res);
+//   helper(root.right, cur, res);
+// }
+
+// BFS 迭代
 var binaryTreePaths = function (root) {
+  if (!root) return [];
+
+  const nodes = [[root, `${root.val}`]];
   const res = [];
-  if (!root) return res;
-  helper(root, [], res);
-  return res;
-};
 
-function helper(root, cur, res) {
-  if (!root) return;
+  while (nodes.length) {
+    let [node, path] = nodes.shift();
 
-  if (!root.left && !root.right) {
-    cur += root.val;
-    res.push(cur);
-    return;
-  } else {
-    cur += root.val + '->'
+    if (node.left === null && node.right === null) {
+      res.push(path);
+    }
+    if (node.left) {
+      nodes.push([node.left, `${path}->${node.left.val}`]);
+    }
+    if (node.right) {
+      nodes.push([node.right, `${path}->${node.right.val}`]);
+    }
   }
-  helper(root.left, cur, res);
-  helper(root.right, cur, res);
+  return res;
 }
+
 // @lc code=end
 
