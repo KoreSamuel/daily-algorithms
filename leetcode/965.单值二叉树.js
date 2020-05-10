@@ -19,17 +19,11 @@
 var isUnivalTree = function (root) {
   if (!root) return false;
   let queue = [root];
-  const temp = root.val;
   while (queue.length) {
-    let len = queue.length;
-    for (let i = 0; i < len; i++) {
-      let cur = queue.shift();
-      if (cur.val !== temp) {
-        return false;
-      }
-      if (cur.left) queue.push(cur.left);
-      if (cur.right) queue.push(cur.right);
-    }
+    let cur = queue.shift();
+    if (cur.val !== root.val) return false;
+    if (cur.left) queue.push(cur.left);
+    if (cur.right) queue.push(cur.right);
   }
   return true;
 };
