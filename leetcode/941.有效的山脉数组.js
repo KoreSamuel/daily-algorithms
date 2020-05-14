@@ -7,16 +7,11 @@
  * @param {number[]} A
  * @return {boolean}
  */
-var validMountainArray = function(A) {
+var validMountainArray = function (A) {
   let l = 0;
   let r = A.length - 1;
-  while (l <= r) {
-    if (A[l] < A[l + 1]) {
-      l++;
-    }
-    if (A[r] < A[r - 1]) {
-      r--;
-    }
-  }
+  while (l < r && A[l] < A[l + 1]) l++;
+  if (l === 0 || l === r) return false;
+  while (l < r && A[l] > A[l + 1]) l++;
+  return l === r;
 };
-// 1,2,4,5,4,6,3,2
