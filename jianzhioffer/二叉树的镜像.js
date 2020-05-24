@@ -11,12 +11,14 @@
  */
 var mirrorTree = function (root) {
   if (!root) return null;
-  root.left = mirrorTree(root.left);
-  root.right = mirrorTree(root.right);
-
-  let temp = root.left;
-  root.left = root.right;
-  root.right = temp;
-
+  const queue = [root];
+  while (queue.length) {
+    let cur = queue.shift();
+    if (cur.left) queue.push(cur.left);
+    if (cur.right) queue.push(cur.right);
+    let temp = cur.left;
+    cur.left = cur.right;
+    cur.right = temp;
+  }
   return root;
 };
