@@ -16,18 +16,33 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
+// var isValidBST = function (root) {
+//   if (!root) return true;
+//   const queue = [[Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, root]];
+//   while (queue.length) {
+//     let [min, max, cur] = queue.shift();
+//     if (cur.val <= min || cur.val >= max) {
+//       return false;
+//     }
+//     if (cur.left) queue.push([min, cur.val, cur.left])
+//     if (cur.right) queue.push([cur.val, max, cur.right])
+//   }
+//   return true;
+// };
 var isValidBST = function (root) {
-  if (!root) return true;
-  const queue = [[Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, root]];
-  while (queue.length) {
-    let [min, max, cur] = queue.shift();
-    if (cur.val <= min || cur.val >= max) {
-      return false;
+  const stack = [];
+  let temp = Number.MIN_SAFE_INTEGER;
+  while (stack.length || root !== null) {
+    while (root !== null) {
+      stack.push(root);
+      root = root.left;
     }
-    if (cur.left) queue.push([min, cur.val, cur.left])
-    if (cur.right) queue.push([cur.val, max, cur.right])
+    root = stack.pop();
+    if (root.val <= temp) return false;
+    temp = root.val;
+    root = root.right;
   }
   return true;
-};
+}
 // @lc code=end
 
