@@ -25,5 +25,12 @@ var searchBST = function (root, val) {
     return searchBST(root.right, val);
   }
 };
+
+var searchBST = function (root, val) {
+  while (root !== null && val !== root.val) {
+    root = val < root.val ? root.left : root.right;
+  }
+  return root;
+}
 // @lc code=end
 
