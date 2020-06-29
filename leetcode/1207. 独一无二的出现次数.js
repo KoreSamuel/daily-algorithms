@@ -12,6 +12,7 @@ var uniqueOccurrences = function (arr) {
     if (n in t) {
       return false;
     }
+    t[n] = true;
   }
   return true;
 };
