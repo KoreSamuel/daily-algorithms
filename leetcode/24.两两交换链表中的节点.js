@@ -13,6 +13,7 @@
  * }
  */
 /**
+ * 递归
  * @param {ListNode} head
  * @return {ListNode}
  */
@@ -23,6 +24,29 @@ var swapPairs = function (head) {
   p.next = swapPairs(q.next);
   q.next = p;
   return q;
+};
+
+/**
+ * 迭代
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var swapPairs = function (head) {
+  let hack = new ListNode(0);
+  hack.next = head;
+  let prev = hack;
+  while (head && head.next) {
+    let p = head;
+    let q = head.next;
+
+    prev.next = q;
+    p.next = q.next;
+    q.next = p;
+
+    prev = p;
+    head = p.next;
+  }
+  return hack.next;
 };
 // @lc code=end
 
